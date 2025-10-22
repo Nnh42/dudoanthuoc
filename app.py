@@ -50,8 +50,12 @@ if st.button("🔮 Dự đoán"):
     if age < 17:
         st.success("💊 Kết quả dự đoán: **DrugZ** (Thuốc đặc biệt cho người dưới 17 tuổi)")
         try:
-            image = Image.open("drugZ.jpg")
-            st.image(image, caption="Minh họa: Thuốc DrugZ", width=250)
+            img_path = pathlib.Path(__file__).parent / "images" / "drugz.jpg"
+            if img_path.exists():
+                st.image(str(img_path), caption="Minh họa: Thuốc DrugZ", width=250)
+            else:
+                st.info("Không tìm thấy hình minh họa DrugZ.")
+            #st.image(image, caption="Minh họa: Thuốc DrugZ", width=250)
         except:
             st.info("Không tìm thấy hình minh họa DrugZ.")
     else:
@@ -72,10 +76,16 @@ if st.button("🔮 Dự đoán"):
         st.success(f"💊 Kết quả dự đoán: **{drug_name}**")
 
         try:
-            image = Image.open(f"{drug_name.lower()}.jpg")
-            st.image(image, caption=f"Minh họa: Thuốc {drug_name}", width=250)
+            import pathlib
+            img_path = pathlib.Path(__file__).parent / "images" / f"{drug_name.lower()}.jpg"
+            if img_path.exists():
+                st.image(str(img_path), caption=f"Minh họa: Thuốc {drug_name}", width=250)
+            else:
+                st.info("Không có hình minh họa cho loại thuốc này.")
+
+            #st.image(image, caption=f"Minh họa: Thuốc {drug_name}", width=250)
         except:
             st.info("Không có hình minh họa cho loại thuốc này.")
 
 st.markdown("---")
-st.caption("🧠 Mô hình Support Vector Machine (SVC - sklearn)")
+st.caption("🧠 Mô hình Support Vector Machine ")
